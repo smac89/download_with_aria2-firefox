@@ -1,0 +1,44 @@
+body {
+    font-size: 14px;
+    user-select: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.button {
+    background-color: #FFF;
+    border: 1px outset #CCC;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.button:hover {
+    filter: contrast(75%);
+}
+
+.button:active {
+    border-style: inset;
+    filter: contrast(25%);
+}
+
+.checked {
+    border-style: inset;
+}
+
+input, textarea {
+    font-size: 14px;
+    padding: 3.5px;
+    resize: none;
+}
+
+textarea {
+    height: 200px;
+}
+
+option:checked {
+    font-weight: bold;
+    color: #F00;
+}

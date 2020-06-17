@@ -1,0 +1,38 @@
+{
+    "name": "__MSG_extension_name__",
+    "description": "__MSG_extension_description__",
+    "version": "2.1000",
+    "manifest_version": 2,
+    "minimum_chrome_version": "63",
+    "permissions": [ "contextMenus", "webRequest", "webRequestBlocking", "cookies", "notifications", "<all_urls>" ],
+    "default_locale" : "en",
+    "background": {
+        "scripts": [ "js/common.js", "background.js" ],
+        "persistent": true
+    },
+    "browser_action": {
+        "default_icon": {
+            "24": "icons/icon24.png"
+        },
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "128": "icons/icon128.png",
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png"
+    },
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    },
+    "applications": {
+        "gecko": {
+            "id": "firefox@downwitharia2",
+            "strict_min_version": "58.0"
+        }
+    },
+    "developer": {
+       "name": "jc3213",
+       "url": "https://github.com/jc3213/download_with_aria2"
+    }
+}

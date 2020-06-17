@@ -1,0 +1,31 @@
+body {
+    position: absolute;
+    left: calc((100% - 600px) / 2);
+    width: 600px;
+}
+
+.container {
+    padding: 10px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 300px;
+}
+
+#capture {
+    width: 20px;
+    transform: scale(1.7);
+}
+
+#sizeEntry {
+    width: 240px;
+}
+
+#sizeUnit {
+    height: 28px;
+}

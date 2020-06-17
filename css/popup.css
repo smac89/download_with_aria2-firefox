@@ -1,0 +1,144 @@
+body {
+    width: 400px;
+}
+
+#globalMenu {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+#optionsMenu {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+#addTaskWindow {
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    position: absolute;
+    top: 34px;
+    width: 380px;
+    padding: 10px;
+}
+
+#addTaskMenu {
+    position: absolute;
+    top: 14px;
+    right: 10px;
+}
+
+.taskQueue {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.taskQueue .button {
+    font-size: 9px;
+    padding: 1px;
+}
+
+.checked {
+    border-top: 2px solid #F00;
+}
+
+.status {
+    color: #FFF;
+    padding: 3px;
+}
+
+input, textarea {
+    width: 75%;
+}
+
+.taskInfo {
+    width: 380px;
+}
+
+.taskName {
+    font-weight: bold;
+}
+
+#showTaskFiles {
+    background-color: #FFF;
+    padding-top: 5px;
+    position: absolute;
+    top: 0px;
+    width: 400px;
+    height: 440px;
+}
+
+#showTask {
+    height: 44px;
+    word-break: break-word;
+    overflow-y: hidden;
+}
+
+#showTask:active {
+    filter: contrast(25%);
+}
+
+#showFiles {
+    height: 370px;
+    overflow-y: scroll;
+}
+
+table {
+    border-collapse: collapse;
+    width: 380px;
+}
+
+td {
+    border: 1px solid #CCC;
+    max-width: 200px;
+    text-align: center;
+    word-break: break-word;
+}
+
+.progress {
+    color: #FFF;
+    height: 20px;
+    text-align: center;
+}
+
+.progress span {
+    display: block;
+    height: 20px;
+}
+
+.progress:active, .progress:active span {
+    filter: contrast(25%);
+}
+
+.active_bar, .paused_bar, .download {
+    background-color: #3CC;
+}
+
+.removed_bar, .error_bar, .stopped {
+    background-color: #CCC;
+}
+
+.active {
+    background-color: #33C;
+}
+
+.paused {
+    background-color: #CC3;
+}
+
+.error, .removed {
+    background-color: #C33;
+}
+
+.complete {
+    background-color: #3C3;
+}
+
+.upload {
+    background-color: #C3C;
+}
+
+.complete_info {
+    display: none;
+}

@@ -1,0 +1,101 @@
+{
+    "extension_name": {
+        "message": "Download with Aria2"
+    },
+    "extension_description": {
+        "message": "An extension for Mozilla Firefox that allows you to download with Aria2"
+    },
+    "option_jsonrpc": {
+        "message": "JSONRPC URI"
+    },
+    "option_jsonrpc_desc": {
+        "message": "default"
+    },
+    "option_check": {
+        "message": "Check"
+    },
+    "option_token": {
+        "message": "Secret Token"
+    },
+    "option_token_desc": {
+        "message": "ask the administrator if secret token is required"
+    },
+    "option_show": {
+        "message": "Show"
+    },
+    "option_capture": {
+        "message": "Capture"
+    },
+    "option_capture_desc": {
+        "message": "capture browser downloads based on built-in filters"
+    },
+    "option_filesize": {
+        "message": "File Size"
+    },
+    "option_filesize_desc": {
+        "message": "capture downloads those are larger than **<u><i>200MB</i></u>"
+    },
+    "option_fileext": {
+        "message": "File Extensions"
+    },
+    "option_fileext_desc": {
+        "message": "capture downloads base on file extensions, <u>one entry per line</u>"
+    },
+    "option_ignored": {
+        "message": "Ignored Hosts"
+    },
+    "option_ignored_desc": {
+        "message": "<b>ignore</b> downloads from these web hosts, <u>one entry per line</u>"
+    },
+    "popup_active_button": {
+        "message": "Active"
+    },
+    "popup_waiting_button": {
+        "message": "Waiting"
+    },
+    "popup_stopped_button": {
+        "message": "Stopped"
+    },
+    "popup_add_button": {
+        "message": "Add"
+    },
+    "popup_cancel_button": {
+        "message": "Cancel"
+    },
+    "popup_purge_button": {
+        "message": "Purge"
+    },
+    "popup_submit_button": {
+        "message": "Submit"
+    },
+    "popup_options_button": {
+        "message": "Options"
+    },
+    "popup_download": {
+        "message": "Download"
+    },
+    "popup_upload": {
+        "message": "Upload"
+    },
+    "task_download_size": {
+        "message": "Size"
+    },
+    "task_estimated_time": {
+        "message": "Estimated"
+    },
+    "task_connections": {
+        "message": "Connections"
+    },
+    "task_bit_seeders": {
+        "message": "Seeders"
+    },
+    "task_file_index": {
+        "message": "Index"
+    },
+    "task_file_name": {
+        "message": "File Name"
+    },
+    "task_complete_ratio": {
+        "message": "Completed"
+    }
+}
