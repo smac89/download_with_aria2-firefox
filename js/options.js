@@ -6,7 +6,7 @@ function saveOption(event) {
     {'id': 'jsonrpc', 'value': 'http://localhost:6800/jsonrpc', 'change': saveOption},
     {'id': 'token', 'value': '', 'change': saveOption},
     {'id': 'fileExt', 'value': '', 'change': saveOption},
-    {'id': 'monitoredList', 'value': '', 'change': makePattern}
+    {'id': 'monitoredList', 'value': '', 'change': makePattern},
     {'id': 'ignoredList', 'value': '', 'change': makePattern}
 ].map(item => $('#' + item.id).val(localStorage.getItem(item.id) || item.value).on('change', item.change));
 
