@@ -3,7 +3,7 @@
         "message": "通过 Aria2 下载"
     },
     "extension_description": {
-        "message": "本扩展使得 Mozilla Firefox 浏览器能够通过 Aria2 进行下载"
+        "message": "本扩展使得 Chromium 浏览器能够通过 Aria2 进行下载"
     },
     "option_jsonrpc": {
         "message": "JSONRPC 链接"
@@ -29,17 +29,17 @@
     "option_capture_desc": {
         "message": "抓取符合内置过滤器条件的下载"
     },
-    "option_filesize": {
-        "message": "文件大小"
-    },
-    "option_filesize_desc": {
-        "message": "抓取文件大小超过**<u><i>200MB</i></u>的下载"
-    },
     "option_fileext": {
         "message": "文件后缀"
     },
     "option_fileext_desc": {
         "message": "抓取符合列表中的文件后缀的下载, <u>每行一条</u>"
+    },
+    "option_monitored": {
+        "message": "监听域名"
+    },
+    "option_monitored_desc": {
+        "message": "抓取来自列表中的域名的下载, <u>每行一条</u>"
     },
     "option_ignored": {
         "message": "无视域名"

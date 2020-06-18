@@ -4,11 +4,11 @@
     "version": "2.1000",
     "manifest_version": 2,
     "minimum_chrome_version": "63",
-    "permissions": [ "contextMenus", "webRequest", "webRequestBlocking", "cookies", "notifications", "<all_urls>" ],
+    "permissions": [ "contextMenus", "downloads", "cookies", "notifications", "<all_urls>" ],
     "default_locale" : "en",
     "background": {
-        "scripts": [ "js/common.js", "background.js" ],
-        "persistent": true
+        "scripts": [ "background.js", "js/common.js" ],
+        "persistent": false
     },
     "browser_action": {
         "default_icon": {

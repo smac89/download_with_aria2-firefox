@@ -5,9 +5,8 @@ function saveOption(event) {
 [
     {'id': 'jsonrpc', 'value': 'http://localhost:6800/jsonrpc', 'change': saveOption},
     {'id': 'token', 'value': '', 'change': saveOption},
-    {'id': 'sizeEntry', 'value': 0, 'change': calcFileSize},
-    {'id': 'sizeUnit', 'value': 2, 'change': calcFileSize},
     {'id': 'fileExt', 'value': '', 'change': saveOption},
+    {'id': 'monitoredList', 'value': '', 'change': makePattern}
     {'id': 'ignoredList', 'value': '', 'change': makePattern}
 ].map(item => $('#' + item.id).val(localStorage.getItem(item.id) || item.value).on('change', item.change));
 
@@ -50,19 +49,6 @@ function captureFilter(checked) {
     else {
         $('#filters').hide(100);
     }
-}
-
-function calcFileSize(event) {
-    var number = $('#sizeEntry').val() || 0;
-    var unit = $('#sizeUnit').val();
-    if (number === 0) {
-        var size = 0;
-    }
-    else {
-        size = number * Math.pow(1024, unit);
-    }
-    localStorage.setItem('fileSize', size);
-    saveOption(event);
 }
 
 function makePattern(event) {
