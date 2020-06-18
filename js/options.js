@@ -39,7 +39,6 @@ $('#capture').attr('checked', () => {
 }).on('click', (event) => {
     captureFilter(event.target.checked);
     localStorage.setItem(event.target.id, event.target.checked);
-    chrome.runtime.sendMessage({'capture': event.target.checked});
 });
 
 function captureFilter(checked) {
