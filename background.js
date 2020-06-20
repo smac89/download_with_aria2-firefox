@@ -25,7 +25,7 @@ browser.downloads.onCreated.addListener((item) => {
     }
 
     function captureAdd(item) {
-        var captured = captureCheck(item.referrer.split('/')[2], item.filename.split('.').pop(), item.fileSize);
+        var captured = captureCheck(item.referrer.split('/')[2], item.filename.split('.').pop());
         if (captured) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({id: item.id});
