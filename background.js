@@ -25,7 +25,7 @@ browser.downloads.onCreated.addListener((item) => {
     }
 
     function captureAdd(item) {
-        var captured = captureCheck(item.referrer.split('/')[2], item.filename.split('.').pop());
+        var captured = captureCheck(getDomain(item.referrer), item.filename.split('.').pop());
         if (captured) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({id: item.id});
@@ -34,31 +34,23 @@ browser.downloads.onCreated.addListener((item) => {
         }
     }
 
-    function captureCheck(host, ext) {
-        var ignored = localStorage.getItem('ignored');
-        if (ignored && ignored !== '[]') {
-            if (matchPattern(ignored, host)) {
-                return false;
-            }
-        }
-        var monitored = localStorage.getItem('monitored');
-        if (monitored && monitored !== '[]') {
-            if (matchPattern(monitored, host)) {
-                return true;
-            }
-        }
-        var fileExt = localStorage.getItem('fileExt');
-        if (fileExt && fileExt !== '') {
-            if (fileExt.includes(ext)) {
-                return true;
-            }
-        }
-        return false;
+    function getDomain(url) {
+        var host = url.split('/')[2];
+        var temp = host.split('.').reverse();
+        return temp[1] + '.' + temp[0];
     }
 
-    function matchPattern(pattern, string) {
-        var match = JSON.parse(pattern).filter(item => string.includes(item));
-        if (match.length !== 0) {
+    function captureCheck(host, ext) {
+        var ignored = localStorage.getItem('ignored');
+        if (ignored && ignored.includes(domain)) {
+            return false;
+        }
+        var monitored = localStorage.getItem('monitored');
+        if (monitored && monitored.includes(domain)) {
+            return true;
+        }
+        var fileExt = localStorage.getItem('fileExt');
+        if (fileExt && fileExt.includes(ext)) {
             return true;
         }
         return false;

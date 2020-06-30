@@ -6,8 +6,8 @@ function saveOption(event) {
     {'id': 'jsonrpc', 'value': 'http://localhost:6800/jsonrpc', 'change': saveOption},
     {'id': 'token', 'value': '', 'change': saveOption},
     {'id': 'fileExt', 'value': '', 'change': saveOption},
-    {'id': 'monitoredList', 'value': '', 'change': makePattern},
-    {'id': 'ignoredList', 'value': '', 'change': makePattern}
+    {'id': 'monitored', 'value': '', 'change': saveOption},
+    {'id': 'ignored', 'value': '', 'change': saveOption}
 ].map(item => $('#' + item.id).val(localStorage.getItem(item.id) || item.value).on('change', item.change));
 
 $('#aria2Check').on('click', (event) => {
@@ -48,10 +48,4 @@ function captureFilter(checked) {
     else {
         $('#filters').hide(100);
     }
-}
-
-function makePattern(event) {
-    var pattern = event.target.value.split('\n').filter(item => item !== '');
-    localStorage.setItem(event.target.id.replace('List', ''), JSON.stringify(pattern));
-    saveOption(event);
 }
