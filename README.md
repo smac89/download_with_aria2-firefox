@@ -1,4 +1,4 @@
-## Differences compared to [Download with Aria2 Chromium](https://github.com/jc3213/download_with_aria2-chromium/blob/master/README.md)
+## Differences compared to [Download with Aria2 Chromium](https://github.com/jc3213/download_with_aria2-chromium)
 
 - Moved to `downloads.onCreated` event handler, but works the same as `downloads.onDeterminingFilename` on Chrome
 - Cancel the download first before removing it from history to prevent downloading the file twice
