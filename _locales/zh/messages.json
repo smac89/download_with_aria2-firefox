@@ -29,12 +29,6 @@
     "option_capture_desc": {
         "message": "抓取符合内置过滤器条件的下载"
     },
-    "option_filesize": {
-        "message": "文件大小"
-    },
-    "option_filesize_desc": {
-        "message": "抓取文件大小超过**<u><i>200MB</i></u>的下载"
-    },
     "option_fileext": {
         "message": "文件后缀"
     },

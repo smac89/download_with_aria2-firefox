@@ -29,12 +29,6 @@
     "option_capture_desc": {
         "message": "capture browser downloads based on built-in filters"
     },
-    "option_filesize": {
-        "message": "File Size"
-    },
-    "option_filesize_desc": {
-        "message": "capture downloads those are larger than **<u><i>200MB</i></u>"
-    },
     "option_fileext": {
         "message": "File Extensions"
     },
