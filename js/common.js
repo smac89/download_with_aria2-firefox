@@ -86,30 +86,31 @@ function showNotification(title, message) {
         'iconUrl': 'icons/icon64.png',
         'message': message || ''
     };
-    chrome.notifications.create(id, notification, () => {
+    browser.notifications.create(id, notification, () => {
         setTimeout(() => {
-            chrome.notifications.clear(id);
+            browser.notifications.clear(id);
         }, 5000);
     });
 }
 
-function downWithAria2(url, referer) {
+function downWithAria2(url, referer, proxy) {
     if (referer) {
-        chrome.cookies.getAll({'url': referer}, (cookies) => {
+        browser.cookies.getAll({'url': referer}, (cookies) => {
             var params = {
                 'header': [
                     'Referer: ' + referer,
                     'Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' ')
-                ]
+                ],
+                'all-proxy': proxy
             }
-            sendRequest({'method': 'aria2.addUri', 'url': url, 'params': [params]}, url);
+            sendRequest({'method': 'aria2.addUri', 'url': url, 'params': [params]});
         });
     }
     else {
-        sendRequest({'method': 'aria2.addUri', 'url': url}, url);
+        sendRequest({'method': 'aria2.addUri', 'url': url, 'params': [{'all-proxy': proxy}]});
     }
 
-    function sendRequest(options, url) {
+    function sendRequest(options) {
         jsonRPCRequest(
             options,
             (result) => {
@@ -120,6 +121,8 @@ function downWithAria2(url, referer) {
             }
         );
     }
+
+    return url;
 }
 
 function bytesToFileSize(bytes) {

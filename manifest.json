@@ -1,7 +1,7 @@
 {
     "name": "__MSG_extension_name__",
     "description": "__MSG_extension_description__",
-    "version": "2.1320",
+    "version": "2.1400",
     "manifest_version": 2,
     "minimum_chrome_version": "35",
     "permissions": [ "contextMenus", "downloads", "tabs", "cookies", "notifications", "<all_urls>" ],
@@ -24,15 +24,5 @@
     "options_ui": {
         "page": "options.html",
         "open_in_tab": true
-    },
-    "applications": {
-        "gecko": {
-            "id": "firefox@downwitharia2",
-            "strict_min_version": "58.0"
-        }
-    },
-    "developer": {
-       "name": "jc3213",
-       "url": "https://github.com/jc3213/download_with_aria2-firefox"
     }
 }

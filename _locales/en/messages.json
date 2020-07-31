@@ -3,7 +3,7 @@
         "message": "Download with Aria2"
     },
     "extension_description": {
-        "message": "An extension for Mozilla Firefox that allows you to download with Aria2"
+        "message": "An extension for Chromium that allows you to download with Aria2"
     },
     "option_jsonrpc": {
         "message": "JSONRPC URI"
@@ -28,6 +28,12 @@
     },
     "option_capture_desc": {
         "message": "capture browser downloads based on built-in filters"
+    },
+    "option_filesize": {
+        "message": "File Size"
+    },
+    "option_filesize_desc": {
+        "message": "capture downloads those are larger than **<u><i>200MB</i></u>"
     },
     "option_fileext": {
         "message": "File Extensions"
@@ -103,5 +109,8 @@
     },
     "add_task_batch": {
         "message": "Download Urls"
+    },
+    "add_task_proxy": {
+        "message": "Use Proxy"
     }
 }
