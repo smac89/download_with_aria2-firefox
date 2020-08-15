@@ -1,4 +1,4 @@
-$('[i18n]').each((index, element) => {
+$('.i18n').each((index, element) => {
     $(element).html(browser.i18n.getMessage(element.innerHTML));
 });
 
