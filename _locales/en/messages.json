@@ -3,7 +3,7 @@
         "message": "Download with Aria2"
     },
     "extension_description": {
-        "message": "An extension for Mozilla Firefox that allows you to download with Aria2"
+        "message": "An extension for Chromium that allows you to download with Aria2"
     },
     "option_jsonrpc": {
         "message": "JSONRPC URI"
@@ -56,8 +56,8 @@
     "popup_stopped_button": {
         "message": "Stopped"
     },
-    "popup_add_button": {
-        "message": "Add"
+    "popup_new_button": {
+        "message": "New"
     },
     "popup_cancel_button": {
         "message": "Cancel"
@@ -98,13 +98,13 @@
     "task_complete_ratio": {
         "message": "Completed"
     },
-    "add_task_referer": {
+    "new_task_referer": {
         "message": "Referer"
     },
-    "add_task_batch": {
+    "new_task_batch": {
         "message": "Download Urls"
     },
-    "add_task_proxy": {
+    "new_task_proxy": {
         "message": "Use Proxy"
     },
     "warn_aria2_version": {

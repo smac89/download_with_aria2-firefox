@@ -3,7 +3,7 @@
         "message": "通过 Aria2 下载"
     },
     "extension_description": {
-        "message": "本扩展使得 Mozilla Firefox 浏览器能够通过 Aria2 进行下载"
+        "message": "本扩展使得 Chromium 浏览器能够通过 Aria2 进行下载"
     },
     "option_jsonrpc": {
         "message": "JSONRPC 链接"
@@ -56,8 +56,8 @@
     "popup_stopped_button": {
         "message": "已停止"
     },
-    "popup_add_button": {
-        "message": "添加"
+    "popup_new_button": {
+        "message": "新下载"
     },
     "popup_cancel_button": {
         "message": "取消"
@@ -98,13 +98,13 @@
     "task_complete_ratio": {
         "message": "已完成"
     },
-    "add_task_referer": {
+    "new_task_referer": {
         "message": "引用页"
     },
-    "add_task_batch": {
+    "new_task_batch": {
         "message": "下载链接"
     },
-    "add_task_proxy": {
+    "new_task_proxy": {
         "message": "使用代理"
     },
     "warn_aria2_version": {
