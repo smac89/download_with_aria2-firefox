@@ -3,5 +3,5 @@
 - Published on [AMO](https://addons.mozilla.org/en-US/firefox/addon/downwitharia2/)
 - Moved to `downloads.onCreated` event handler, but works the same as `downloads.onDeterminingFilename` on Chrome
 - Cancel the download first before removing it from history to prevent downloading the file twice
-- Removed capture filter `File Sze`, since the value of `downloadItem.fileSize` property is `-1` on Firefox
+- Removed capture filter `File Size`, since the value of `downloadItem.fileSize` property is `-1` on Firefox
 - Changed all `chrome` to `browser` for Firefox
