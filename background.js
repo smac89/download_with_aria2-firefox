@@ -1,16 +1,16 @@
 browser.contextMenus.create({
     'title': browser.i18n.getMessage('extension_name'),
-    'id': 'downwitharia2firefox',
+    'id': 'downwitharia2',
     'contexts': ['link']
 });
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === 'downwitharia2firefox') {
+    if (info.menuItemId === 'downwitharia2') {
         downWithAria2(info.linkUrl, tab.url);
     }
 });
 
-browser.downloads.onCreated.addListener((item) => {
+browser.downloads.onDeterminingFilename.addListener((item, suggest) => {
     var capture = JSON.parse(localStorage.getItem('capture')) || false;
     if (capture) {
         if (item.referrer) {
@@ -25,11 +25,12 @@ browser.downloads.onCreated.addListener((item) => {
     }
 
     function captureAdd(item) {
-        var captured = captureCheck(getDomain(item.referrer), item.filename.split('.').pop());
+        var captured = captureCheck(getDomain(item.referrer), item.filename.split('.').pop(), item.fileSize);
         if (captured) {
             browser.downloads.cancel(item.id, () => {
-                browser.downloads.erase({id: item.id});
-                downWithAria2(item.url, item.referrer);
+                browser.downloads.erase({'id': item.id}, () => {
+                    downWithAria2(item.finalUrl, item.referrer);
+                });
             });
         }
     }
@@ -43,7 +44,7 @@ browser.downloads.onCreated.addListener((item) => {
         return temp[1] + '.' + temp[0];
     }
 
-    function captureCheck(host, ext) {
+    function captureCheck(domain, ext, size) {
         var ignored = localStorage.getItem('ignored');
         if (ignored && ignored.includes(domain)) {
             return false;
