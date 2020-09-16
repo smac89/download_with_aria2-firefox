@@ -1,17 +1,25 @@
-function saveOption(event) {
-    localStorage.setItem(event.target.id, event.target.value);
-}
+$('#tabBasic, #tabAdvanced, #tabDownload').click((event) => {
+    var check = '#' + event.target.id;
+    var menu = check.replace('tab', 'menu');
+    var uncheck = ['#tabBasic', '#tabAdvanced', '#tabDownload'].filter(item => item !== check).join(', ');
+    var hide = ['#menuBasic', '#menuAdvanced', '#menuDownload'].filter(item => item !== menu).join(', ');
+    $(uncheck).removeClass('checked');
+    $(hide).hide();
+    $(check).addClass('checked');
+    $(menu).show();
+});
 
 [
-    {'id': 'jsonrpc', 'value': 'http://localhost:6800/jsonrpc', 'change': saveOption},
-    {'id': 'token', 'value': '', 'change': saveOption},
-    {'id': 'useragent', 'value': navigator.userAgent, 'change': saveOption},
-    {'id': 'allproxy', 'value': '', 'change': saveOption},
-    {'id': 'proxied', 'value': '', 'change': saveOption},
-    {'id': 'fileExt', 'value': '', 'change': saveOption},
-    {'id': 'monitored', 'value': '', 'change': saveOption},
-    {'id': 'ignored', 'value': '', 'change': saveOption}
-].map(item => $('#' + item.id).val(localStorage.getItem(item.id) || item.value).on('change', item.change));
+    {'id': 'jsonrpc', 'value': 'http://localhost:6800/jsonrpc'},
+    {'id': 'token', 'value': ''},
+    {'id': 'useragent', 'value': navigator.userAgent},
+    {'id': 'allproxy', 'value': ''},
+    {'id': 'proxied', 'value': ''},
+    {'id': 'capture', 'value': false, 'checkbox': true},
+    {'id': 'fileExt', 'value': ''},
+    {'id': 'monitored', 'value': ''},
+    {'id': 'ignored', 'value': ''}
+].map(item => initiateOption(item));
 
 $('#aria2Check').on('click', (event) => {
     jsonRPCRequest(
@@ -35,20 +43,24 @@ $('#aria2Show').on('click', (event) => {
     $('#aria2Show').toggleClass('checked');
 });
 
-$('#capture').attr('checked', () => {
-    var checked = JSON.parse(localStorage.getItem('capture')) || false;
-    captureFilter(checked);
-    return checked;
-}).on('click', (event) => {
-    captureFilter(event.target.checked);
-    localStorage.setItem(event.target.id, event.target.checked);
-});
-
-function captureFilter(checked) {
-    if (checked) {
-        $('#filters').show(100);
+function initiateOption(option) {
+    if (option.checkbox) {
+        $('#' + option.id).prop('checked', JSON.parse(localStorage.getItem(option.id)) || option.value).on('change', event => localStorage.setItem(event.target.id, event.target.checked));
     }
     else {
-        $('#filters').hide(100);
+        $('#' + option.id).val(localStorage.getItem(option.id) || option.value).on('change', event => option.change ? option.change(event) : localStorage.setItem(event.target.id, event.target.value));
     }
+}
+
+function calcFileSize(event) {
+    var number = $('#sizeEntry').val() || 0;
+    var unit = $('#sizeUnit').val();
+    if (number === 0) {
+        var size = 0;
+    }
+    else {
+        size = number * Math.pow(1024, unit);
+    }
+    localStorage.setItem('fileSize', size);
+    localStorage.setItem(event.target.id, event.target.value);
 }
