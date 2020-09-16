@@ -100,9 +100,9 @@ function showNotification(title, message) {
         'iconUrl': 'icons/icon64.png',
         'message': message || ''
     };
-    chrome.notifications.create(id, notification, () => {
+    browser.notifications.create(id, notification, () => {
         setTimeout(() => {
-            chrome.notifications.clear(id);
+            browser.notifications.clear(id);
         }, 5000);
     });
 }
@@ -120,7 +120,7 @@ function downWithAria2(url, referer, proxy) {
         'all-proxy': proxy
     }
     if (referer) {
-        chrome.cookies.getAll({'url': referer}, (cookies) => {
+        browser.cookies.getAll({'url': referer}, (cookies) => {
             options.header.push('Referer: ' + referer);
             options.header.push('Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' '));
             sendRequest(options);
