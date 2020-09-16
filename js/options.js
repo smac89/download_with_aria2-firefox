@@ -6,6 +6,8 @@ function saveOption(event) {
     {'id': 'jsonrpc', 'value': 'http://localhost:6800/jsonrpc', 'change': saveOption},
     {'id': 'token', 'value': '', 'change': saveOption},
     {'id': 'useragent', 'value': navigator.userAgent, 'change': saveOption},
+    {'id': 'allproxy', 'value': '', 'change': saveOption},
+    {'id': 'proxied', 'value': '', 'change': saveOption},
     {'id': 'fileExt', 'value': '', 'change': saveOption},
     {'id': 'monitored', 'value': '', 'change': saveOption},
     {'id': 'ignored', 'value': '', 'change': saveOption}

@@ -25,7 +25,7 @@ browser.downloads.onCreated.addListener((item) => {
     }
 
     function captureAdd(item) {
-        var captured = captureCheck(getDomain(item.referrer), item.filename.split('.').pop());
+        var captured = captureCheck(domainFromUrl(item.referrer), item.filename.split('.').pop());
         if (captured) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({'id': item.id}, () => {
@@ -33,15 +33,6 @@ browser.downloads.onCreated.addListener((item) => {
                 });
             });
         }
-    }
-
-    function getDomain(url) {
-        var host = url.split(/[\/:]+/)[1];
-        var temp = host.split('.').reverse();
-        if ('com,net,org,edu,gov,co'.includes(temp[1])) {
-            return temp[2] + '.' + temp[1] + '.' + temp[0];
-        }
-        return temp[1] + '.' + temp[0];
     }
 
     function captureCheck(domain, ext) {
