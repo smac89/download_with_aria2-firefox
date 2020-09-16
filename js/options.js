@@ -51,16 +51,3 @@ function initiateOption(option) {
         $('#' + option.id).val(localStorage.getItem(option.id) || option.value).on('change', event => option.change ? option.change(event) : localStorage.setItem(event.target.id, event.target.value));
     }
 }
-
-function calcFileSize(event) {
-    var number = $('#sizeEntry').val() || 0;
-    var unit = $('#sizeUnit').val();
-    if (number === 0) {
-        var size = 0;
-    }
-    else {
-        size = number * Math.pow(1024, unit);
-    }
-    localStorage.setItem('fileSize', size);
-    localStorage.setItem(event.target.id, event.target.value);
-}
