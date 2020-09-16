@@ -100,9 +100,9 @@ function showNotification(title, message) {
         'iconUrl': 'icons/icon64.png',
         'message': message || ''
     };
-    browser.notifications.create(id, notification, () => {
+    chrome.notifications.create(id, notification, () => {
         setTimeout(() => {
-            browser.notifications.clear(id);
+            chrome.notifications.clear(id);
         }, 5000);
     });
 }
@@ -120,7 +120,7 @@ function downWithAria2(url, referer, proxy) {
         'all-proxy': proxy
     }
     if (referer) {
-        browser.cookies.getAll({'url': referer}, (cookies) => {
+        chrome.cookies.getAll({'url': referer}, (cookies) => {
             options.header.push('Referer: ' + referer);
             options.header.push('Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' '));
             sendRequest(options);
@@ -130,7 +130,7 @@ function downWithAria2(url, referer, proxy) {
         sendRequest(options);
     }
 
-    function sendRequest(request) {
+    function sendRequest(options) {
         jsonRPCRequest(
             {'method': 'aria2.addUri', 'url': url, 'options': options},
             (result) => {
