@@ -24,5 +24,15 @@
     "options_ui": {
         "page": "options.html",
         "open_in_tab": true
+    },
+    "applications": {
+        "gecko": {
+            "id": "firefox@downwitharia2",
+            "strict_min_version": "63.0"
+        }
+    },
+    "developer": {
+       "name": "jc3213",
+       "url": "https://github.com/jc3213/download_with_aria2-firefox"
     }
 }
