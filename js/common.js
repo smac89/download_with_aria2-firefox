@@ -116,9 +116,9 @@ function downWithAria2(session, proxy) {
         'header': [
             'User-Agent: ' + localStorage.getItem('useragent') || navigator.userAgent
         ],
-        'all-proxy': proxy,
-        'dir': downloadFolder(session.folder)
+        'all-proxy': proxy
     }
+    defineDownloadFolder(options, session.path);
     if (session.referer) {
         browser.cookies.getAll({'url': session.referer}, (cookies) => {
             options.header.push('Referer: ' + session.referer);
@@ -145,16 +145,15 @@ function downWithAria2(session, proxy) {
     return session.url;
 }
 
-function downloadFolder(path) {
+function defineDownloadFolder(options, path) {
     var folder = (localStorage.getItem('folder') | 0);
     var directory = localStorage.getItem('directory') || '';
     if (folder === 1 && path) {
-        return path;
+        options['dir'] = path;
     }
     else if (folder === 2 && directory) {
-        return directory;
+        options['dir'] = directory;
     }
-    return '';
 }
 
 function domainFromUrl(url) {

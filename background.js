@@ -30,10 +30,15 @@ browser.downloads.onCreated.addListener((item) => {
         if (capture === 2 || check) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({'id': item.id}, () => {
-                    downWithAria2({'url': item.finalUrl, 'referer': item.referrer, 'domain': domain});
+                    downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': domain, 'path': getFilePath(item.filename)});
                 });
             });
         }
+    }
+
+    function getFilePath(path) {
+        var filename = path.split('\\').pop();
+        return path.replace(filename, '');
     }
 
     function captureCheck(domain, ext, size) {
