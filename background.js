@@ -6,7 +6,7 @@ browser.contextMenus.create({
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === 'downwitharia2firefox') {
-        downWithAria2(info.linkUrl, tab.url);
+        downWithAria2({'url': info.linkUrl, 'referer': tab.url, 'domain': domainFromUrl(tab.url)});
     }
 });
 
@@ -25,17 +25,18 @@ browser.downloads.onCreated.addListener((item) => {
     }
 
     function captureAdd(capture, item) {
-        var check = captureCheck(domainFromUrl(item.referrer), item.filename.split('.').pop());
+        var domain = domainFromUrl(item.referrer);
+        var check = captureCheck(domain, item.filename.split('.').pop(), item.fileSize);
         if (capture === 2 || check) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({'id': item.id}, () => {
-                    downWithAria2(item.url, item.referrer);
+                    downWithAria2({'url': item.finalUrl, 'referer': item.referrer, 'domain': domain});
                 });
             });
         }
     }
 
-    function captureCheck(domain, ext) {
+    function captureCheck(domain, ext, size) {
         var ignored = localStorage.getItem('ignored');
         if (ignored && ignored.includes(domain)) {
             return false;
@@ -46,6 +47,10 @@ browser.downloads.onCreated.addListener((item) => {
         }
         var fileExt = localStorage.getItem('fileExt');
         if (fileExt && fileExt.includes(ext)) {
+            return true;
+        }
+        var fileSize = localStorage.getItem('fileSize');
+        if (fileSize > 0 && size >= fileSize) {
             return true;
         }
         return false;
