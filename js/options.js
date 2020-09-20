@@ -12,6 +12,8 @@ $('#tabBasic, #tabAdvanced, #tabDownload').click((event) => {
 [
     {'id': 'jsonrpc', 'value': 'http://localhost:6800/jsonrpc'},
     {'id': 'token', 'value': ''},
+    {'id': 'folder', 'value': 0},
+    {'id': 'directory', 'value': ''},
     {'id': 'useragent', 'value': navigator.userAgent},
     {'id': 'allproxy', 'value': ''},
     {'id': 'proxied', 'value': ''},

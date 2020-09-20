@@ -32,6 +32,21 @@
     "option_show": {
         "message": "显示"
     },
+    "option_folder": {
+        "message": "下载目录"
+    },
+    "option_folder_native": {
+        "message": "默认"
+    },
+    "option_folder_browser": {
+        "message": "浏览器"
+    },
+    "option_folder_custom": {
+        "message": "自定义"
+    },
+    "option_folder_desc": {
+        "message": "将文件下载至目标目录"
+    },
     "option_useragent": {
         "message": "用户代理"
     },

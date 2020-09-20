@@ -32,6 +32,21 @@
     "option_show": {
         "message": "Show"
     },
+    "option_folder": {
+        "message": "Download Folder"
+    },
+    "option_folder_native": {
+        "message": "Native"
+    },
+    "option_folder_browser": {
+        "message": "Browser"
+    },
+    "option_folder_custom": {
+        "message": "Custom"
+    },
+    "option_folder_desc": {
+        "message": "download files to where you would preferred"
+    },
     "option_useragent": {
         "message": "User Agent"
     },
