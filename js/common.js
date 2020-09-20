@@ -142,18 +142,18 @@ function downWithAria2(session, proxy) {
         );
     }
 
-    return session.url;
-}
+    function defineDownloadFolder(options, path) {
+        var folder = (localStorage.getItem('folder') | 0);
+        var directory = localStorage.getItem('directory') || '';
+        if (folder === 1 && path) {
+            options['dir'] = path;
+        }
+        else if (folder === 2 && directory) {
+            options['dir'] = directory;
+        }
+    }
 
-function defineDownloadFolder(options, path) {
-    var folder = (localStorage.getItem('folder') | 0);
-    var directory = localStorage.getItem('directory') || '';
-    if (folder === 1 && path) {
-        options['dir'] = path;
-    }
-    else if (folder === 2 && directory) {
-        options['dir'] = directory;
-    }
+    return session.url;
 }
 
 function domainFromUrl(url) {
