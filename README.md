@@ -4,7 +4,7 @@
 
 - Differences
     - Moved to `downloads.onCreated` event handler, but works the same as `downloads.onDeterminingFilename` on Chrome
-    - Exclusive feature: Ability to choose download folder for 3 options
+    - Exclusive feature: Ability to choose download folder for `3` options
         1. Native (Aria2 download folder)
         2. Browser (Browser download folder)
         3. Custom (Custom folder)
