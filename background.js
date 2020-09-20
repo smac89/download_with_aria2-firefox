@@ -24,7 +24,7 @@ browser.downloads.onCreated.addListener((item) => {
         }
     }
 
-    function captureAdd(item) {
+    function captureAdd(capture, item) {
         var check = captureCheck(domainFromUrl(item.referrer), item.filename.split('.').pop());
         if (capture === 2 || check) {
             browser.downloads.cancel(item.id, () => {
