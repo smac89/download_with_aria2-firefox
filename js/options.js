@@ -63,3 +63,5 @@ function calcFileSize(event) {
     localStorage.setItem('fileSize', size);
     localStorage.setItem(event.target.id, event.target.value);
 }
+
+$('#sizeEntry, #sizeUnit').prop('disabled', 'disabled');
