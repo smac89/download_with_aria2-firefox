@@ -28,3 +28,11 @@ input, textarea {
 #capture, #folder {
     font-size: 20px;
 }
+
+#sizeEntry {
+    width: 300px;
+}
+
+#sizeUnit {
+    height: 28px;
+}
