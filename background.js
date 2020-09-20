@@ -29,7 +29,7 @@ browser.downloads.onCreated.addListener((item) => {
         if (captured) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({'id': item.id}, () => {
-                    downWithAria2(item.finalUrl, item.referrer);
+                    downWithAria2(item.url, item.referrer);
                 });
             });
         }
