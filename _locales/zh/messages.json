@@ -80,6 +80,12 @@
     "option_capture_desc": {
         "message": "根据用户设置抓取来自浏览器的下载请求"
     },
+    "option_filesize": {
+        "message": "文件大小"
+    },
+    "option_filesize_desc": {
+        "message": "抓取文件大小超过**<u><i>200MB</i></u>的下载"
+    },
     "option_fileext": {
         "message": "文件后缀"
     },
