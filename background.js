@@ -11,22 +11,22 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 });
 
 browser.downloads.onCreated.addListener((item) => {
-    var capture = JSON.parse(localStorage.getItem('capture')) || false;
-    if (capture) {
+    var capture = (localStorage.getItem('capture') | 0);
+    if (capture > 0) {
         if (item.referrer) {
-            captureAdd(item);
+            captureAdd(capture, item);
         }
         else {
             browser.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
                 item.referrer = tabs[0].url;
-                captureAdd(item);
+                captureAdd(capture, item);
             });
         }
     }
 
     function captureAdd(item) {
-        var captured = captureCheck(domainFromUrl(item.referrer), item.filename.split('.').pop());
-        if (captured) {
+        var check = captureCheck(domainFromUrl(item.referrer), item.filename.split('.').pop());
+        if (capture === 2 || check) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({'id': item.id}, () => {
                     downWithAria2(item.url, item.referrer);

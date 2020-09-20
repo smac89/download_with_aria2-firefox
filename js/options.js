@@ -15,7 +15,7 @@ $('#tabBasic, #tabAdvanced, #tabDownload').click((event) => {
     {'id': 'useragent', 'value': navigator.userAgent},
     {'id': 'allproxy', 'value': ''},
     {'id': 'proxied', 'value': ''},
-    {'id': 'capture', 'value': false, 'checkbox': true},
+    {'id': 'capture', 'value': 0},
     {'id': 'fileExt', 'value': ''},
     {'id': 'monitored', 'value': ''},
     {'id': 'ignored', 'value': ''}
