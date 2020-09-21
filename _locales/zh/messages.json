@@ -35,7 +35,7 @@
     "option_folder": {
         "message": "下载目录"
     },
-    "option_folder_native": {
+    "option_folder_default": {
         "message": "默认"
     },
     "option_folder_browser": {

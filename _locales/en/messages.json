@@ -35,8 +35,8 @@
     "option_folder": {
         "message": "Download Folder"
     },
-    "option_folder_native": {
-        "message": "Native"
+    "option_folder_default": {
+        "message": "Default"
     },
     "option_folder_browser": {
         "message": "Browser"
