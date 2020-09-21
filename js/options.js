@@ -82,7 +82,6 @@ function calcFileSize(event) {
     var unit = $('#sizeUnit').val();
     var size = number * Math.pow(1024, unit);
     localStorage.setItem('fileSize', size);
-    localStorage.setItem(event.target.id, event.target.value);
 }
 
 $('#sizeEntry, #sizeUnit').prop('disabled', 'disabled');
