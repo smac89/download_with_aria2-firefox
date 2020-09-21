@@ -12,12 +12,12 @@ $('#tabBasic, #tabAdvanced, #tabDownload').click((event) => {
 [
     {'id': 'jsonrpc', 'value': 'http://localhost:6800/jsonrpc'},
     {'id': 'token', 'value': ''},
-    {'id': 'folder', 'value': 0},
+    {'id': 'folder', 'value': 0, 'load': downloadFolder, 'change': downloadFolder},
     {'id': 'directory', 'value': ''},
     {'id': 'useragent', 'value': navigator.userAgent},
     {'id': 'allproxy', 'value': ''},
     {'id': 'proxied', 'value': ''},
-    {'id': 'capture', 'value': 0},
+    {'id': 'capture', 'value': 0, 'load': captureFilters, 'change': captureFilters},
     {'id': 'sizeEntry', 'value': 0, 'change': calcFileSize},
     {'id': 'sizeUnit', 'value': 2, 'change': calcFileSize},
     {'id': 'fileExt', 'value': ''},
@@ -49,10 +49,31 @@ $('#aria2Show').on('click', (event) => {
 
 function initiateOption(option) {
     if (option.checkbox) {
-        $('#' + option.id).prop('checked', JSON.parse(localStorage.getItem(option.id)) || option.value).on('change', event => localStorage.setItem(event.target.id, event.target.checked));
+        option.target = $('#' + option.id).prop('checked', JSON.parse(localStorage.getItem(option.id)) || option.value).on('change', event => localStorage.setItem(event.target.id, event.target.checked));
     }
     else {
-        $('#' + option.id).val(localStorage.getItem(option.id) || option.value).on('change', event => option.change ? option.change(event) : localStorage.setItem(event.target.id, event.target.value));
+        option.target = $('#' + option.id).val(localStorage.getItem(option.id) || option.value).on('change', event => option.change ? option.change(event) : localStorage.setItem(event.target.id, event.target.value));
+    }
+    option.target.ready(option.load);
+}
+
+function downloadFolder() {
+    var folder = ($('#folder').val() | 0);
+    if (folder === 2) {
+        $('#directory').show();
+    }
+    else {
+        $('#directory').hide();
+    }
+}
+
+function captureFilters() {
+    var capture = ($('#capture').val() | 0);
+    if (capture === 1) {
+        $('#captureFilters').show();
+    }
+    else {
+        $('#captureFilters').hide();
     }
 }
 
