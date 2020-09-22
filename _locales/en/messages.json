@@ -3,7 +3,7 @@
         "message": "Download with Aria2"
     },
     "extension_description": {
-        "message": "An extension for Mozilla Firefox that allows you to download with Aria2"
+        "message": "An extension for Chromium that allows you to download with Aria2"
     },
     "option_basic": {
         "message": "Basic"
@@ -57,7 +57,7 @@
         "message": "Custom"
     },
     "option_folder_desc": {
-        "message": "download files to where you would preferred"
+        "message": "Download files to where you would preferred"
     },
     "option_useragent": {
         "message": "User Agent"
@@ -96,19 +96,19 @@
         "message": "File Extensions"
     },
     "option_fileext_desc": {
-        "message": "Capture downloads base on file extensions"
+        "message": "Capture downloads base on listed file extensions"
     },
     "option_monitored": {
         "message": "Monitored Domains"
     },
     "option_monitored_desc": {
-        "message": "Capture downloads from these domain names"
+        "message": "Monitoring downloads from listed domain names"
     },
     "option_ignored": {
         "message": "Ignored Domains"
     },
     "option_ignored_desc": {
-        "message": "<b>Ignore</b> downloads from these domain names"
+        "message": "Ignore downloads from listed domain names"
     },
     "popup_active_button": {
         "message": "Active"
