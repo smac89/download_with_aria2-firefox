@@ -133,13 +133,15 @@ function downWithAria2(session, proxy) {
     }
 
     function createOptions(session, proxy) {
-        var options = {
-            'header': ['User-Agent: ' + localStorage.getItem('useragent') || navigator.userAgent]
-        }
+        var useragent = localStorage.getItem('useragent') || navigator.userAgent;
         var proxied = localStorage.getItem('proxied') || '';
         if (proxied.includes(session.domain)) {
-            options['all-proxy'] = proxy || localStorage.getItem('allproxy') || '';
+            proxy = proxy || localStorage.getItem('allproxy') || '';
         }
+        var options = {
+            'header': ['User-Agent: ' + useragent],
+            'all-proxy': proxy
+        };
         var folder = (localStorage.getItem('folder') | 0);
         var directory = localStorage.getItem('directory') || '';
         if (folder === 1 && session.path) {
