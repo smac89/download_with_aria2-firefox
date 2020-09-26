@@ -108,17 +108,7 @@ function showNotification(title, message) {
 }
 
 function downWithAria2(session, proxy) {
-    var proxied = localStorage.getItem('proxied') || '';
-    if (proxied.includes(session.domain)) {
-        proxy = proxy || localStorage.getItem('allproxy') || '';
-    }
-    var options = {
-        'header': [
-            'User-Agent: ' + localStorage.getItem('useragent') || navigator.userAgent
-        ],
-        'all-proxy': proxy
-    }
-    defineDownloadFolder(options, session.path);
+    var options = createOptions(session, proxy);
     if (session.referer) {
         browser.cookies.getAll({'url': session.referer}, (cookies) => {
             options.header.push('Referer: ' + session.referer);
@@ -142,15 +132,23 @@ function downWithAria2(session, proxy) {
         );
     }
 
-    function defineDownloadFolder(options, path) {
+    function createOptions(session, proxy) {
+        var options = {
+            'header': ['User-Agent: ' + localStorage.getItem('useragent') || navigator.userAgent]
+        }
+        var proxied = localStorage.getItem('proxied') || '';
+        if (proxied.includes(session.domain)) {
+            options['all-proxy'] = proxy || localStorage.getItem('allproxy') || '';
+        }
         var folder = (localStorage.getItem('folder') | 0);
         var directory = localStorage.getItem('directory') || '';
-        if (folder === 1 && path) {
-            options['dir'] = path;
+        if (folder === 1 && session.path) {
+            options['dir'] = session.path;
         }
         else if (folder === 2 && directory) {
             options['dir'] = directory;
         }
+        return options;
     }
 
     return session.url;
