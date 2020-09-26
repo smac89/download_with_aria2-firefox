@@ -30,15 +30,10 @@ browser.downloads.onCreated.addListener((item) => {
         if (capture === 2 || check) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({'id': item.id}, () => {
-                    downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': domain, 'path': getFilePath(item.filename)});
+                    downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': domain, 'path': item.filename.replace(/[^\\]+$/i, '')));
                 });
             });
         }
-    }
-
-    function getFilePath(path) {
-        var filename = path.split('\\').pop();
-        return path.replace(filename, '');
     }
 
     function captureCheck(domain, ext, size) {
