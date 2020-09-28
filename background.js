@@ -11,6 +11,9 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 });
 
 browser.downloads.onCreated.addListener((item) => {
+    if (item.url.startsWith('blob')) {
+        return;
+    }
     var capture = (localStorage.getItem('capture') | 0);
     if (capture > 0) {
         if (item.referrer) {
