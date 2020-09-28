@@ -108,7 +108,26 @@ function showNotification(title, message) {
 }
 
 function downWithAria2(session) {
-    var options = createOptions(session);
+    var useragent = localStorage.getItem('useragent') || navigator.userAgent;
+    var proxied = localStorage.getItem('proxied') || '';
+    if (proxied.includes(session.domain)) {
+        var allproxy = session.proxy || localStorage.getItem('allproxy') || '';
+    }
+    var options = {
+        'header': ['User-Agent: ' + useragent],
+        'all-proxy': allproxy
+    };
+    if (session.filename) {
+        options['out'] = session.filename;
+    }
+    var folder = (localStorage.getItem('folder') | 0);
+    var directory = localStorage.getItem('directory') || '';
+    if (folder === 1 && session.path) {
+        options['dir'] = session.path;
+    }
+    else if (folder === 2 && directory) {
+        options['dir'] = directory;
+    }
     if (session.referer) {
         browser.cookies.getAll({'url': session.referer}, (cookies) => {
             options.header.push('Referer: ' + session.referer);
@@ -131,32 +150,6 @@ function downWithAria2(session) {
             }
         );
     }
-
-    function createOptions(session) {
-        var useragent = localStorage.getItem('useragent') || navigator.userAgent;
-        var proxied = localStorage.getItem('proxied') || '';
-        if (proxied.includes(session.domain)) {
-            var allproxy = session.proxy || localStorage.getItem('allproxy') || '';
-        }
-        var options = {
-            'header': ['User-Agent: ' + useragent],
-            'all-proxy': allproxy
-        };
-        if (session.filename) {
-            options['out'] = session.filename;
-        }
-        var folder = (localStorage.getItem('folder') | 0);
-        var directory = localStorage.getItem('directory') || '';
-        if (folder === 1 && session.path) {
-            options['dir'] = session.path;
-        }
-        else if (folder === 2 && directory) {
-            options['dir'] = directory;
-        }
-        return options;
-    }
-
-    return session.url;
 }
 
 function domainFromUrl(url) {
