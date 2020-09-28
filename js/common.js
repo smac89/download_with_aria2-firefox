@@ -142,6 +142,9 @@ function downWithAria2(session, proxy) {
             'header': ['User-Agent: ' + useragent],
             'all-proxy': proxy
         };
+        if (session.filename) {
+            options['out'] = session.filename;
+        }
         var folder = (localStorage.getItem('folder') | 0);
         var directory = localStorage.getItem('directory') || '';
         if (folder === 1 && session.path) {
