@@ -25,7 +25,7 @@ input, textarea {
     height: 52px;
 }
 
-#capture {
+#capture, #folder {
     font-size: 20px;
 }
 
