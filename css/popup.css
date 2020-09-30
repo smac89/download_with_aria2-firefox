@@ -60,13 +60,23 @@ textarea {
     padding: 3px;
 }
 
-.title {
-    font-weight: bold;
-    word-break: break-word;
+.taskInfo {
+    border: 1px outset #CCC;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 365px;
 }
 
-.taskInfo {
-    width: 380px;
+.taskName {
+    font-weight: bold;
+    display: inline-block;
+    width: 345px;
+}
+
+.taskMenu {
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
 }
 
 #taskDetails {
@@ -79,6 +89,7 @@ textarea {
 }
 
 #taskName div {
+    width: 390px;
     height: 40px;
     overflow-y: hidden;
 }
@@ -93,7 +104,7 @@ textarea {
 #taskFiles {
     border: 1px outset #CCC;
     margin-top: 5px;
-    height: 285px;
+    height: 275px;
     overflow-y: scroll;
 }
 
