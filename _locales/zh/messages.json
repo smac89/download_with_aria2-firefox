@@ -3,7 +3,7 @@
         "message": "通过 Aria2 下载"
     },
     "extension_description": {
-        "message": "本扩展使得 Chromium 浏览器能够通过 Aria2 进行下载"
+        "message": "本扩展使得 Mozilla Firefox 浏览器能够通过 Aria2 进行下载"
     },
     "option_basic": {
         "message": "基础"
@@ -43,6 +43,21 @@
     },
     "option_token_desc": {
         "message": "设置 Aria2 \"token\" 密钥"
+    },
+    "option_folder": {
+        "message": "下载目录"
+    },
+    "option_folder_default": {
+        "message": "默认"
+    },
+    "option_folder_browser": {
+        "message": "浏览器"
+    },
+    "option_folder_custom": {
+        "message": "自定义"
+    },
+    "option_folder_desc": {
+        "message": "将文件下载至目标目录"
     },
     "option_useragent": {
         "message": "用户代理"
