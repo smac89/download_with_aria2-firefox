@@ -3,7 +3,7 @@
         "message": "Download with Aria2"
     },
     "extension_description": {
-        "message": "An extension for Mozilla Firefox that allows you to download with Aria2"
+        "message": "An extension for Chromium that allows you to download with Aria2"
     },
     "option_basic": {
         "message": "Basic"
@@ -43,21 +43,6 @@
     },
     "option_token_desc": {
         "message": "Setting Aria2 \"token\" option"
-    },
-    "option_folder": {
-        "message": "Download Folder"
-    },
-    "option_folder_default": {
-        "message": "Default"
-    },
-    "option_folder_browser": {
-        "message": "Browser"
-    },
-    "option_folder_custom": {
-        "message": "Custom"
-    },
-    "option_folder_desc": {
-        "message": "Download files to where you would preferred"
     },
     "option_useragent": {
         "message": "User Agent"
@@ -143,11 +128,20 @@
     "new_task_referer": {
         "message": "Referer"
     },
+    "new_task_referer_desc": {
+        "message": "Add \"Referer\" and \"Cookies\" headers for this download session"
+    },
     "new_task_batch": {
         "message": "Download Urls"
     },
+    "new_task_batch_desc": {
+        "message": "The urls to be downloaded, one entry per line"
+    },
     "new_task_proxy": {
         "message": "Use Proxy"
+    },
+    "new_task_proxy_desc": {
+        "message": "Add \"all-proxy\" option to this download session"
     },
     "warn_aria2_version": {
         "message": "Aria2 Version"
