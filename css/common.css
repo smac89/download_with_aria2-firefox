@@ -9,7 +9,6 @@ body {
 }
 
 .tab, .button {
-    font-size: 14px;
     border: 1px outset #CCC;
     border-radius: 5px;
     cursor: pointer;
