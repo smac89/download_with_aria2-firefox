@@ -82,10 +82,9 @@ function showNotification(title, message) {
 }
 
 function downWithAria2(session) {
+    var options = session.options ? session.options : {};
     var useragent = localStorage.getItem('useragent') || navigator.userAgent;
-    var options = {
-        'header': ['User-Agent: ' + useragent]
-    };
+    options['header'] = ['User-Agent: ' + useragent];
     var proxied = localStorage.getItem('proxied') || '';
     if (session.proxy) {
         options['all-proxy'] = session.proxy;
