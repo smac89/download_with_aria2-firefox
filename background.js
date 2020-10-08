@@ -33,7 +33,7 @@ browser.downloads.onCreated.addListener((item) => {
         if (capture === 2 || check) {
             browser.downloads.cancel(item.id, () => {
                 browser.downloads.erase({'id': item.id}, () => {
-                    downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': domain, 'filename': item.filename.match(/[^\\]+$/i)[0], 'path': item.filename.replace(/[^\\]+$/i, '')});
+                    downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': domain, 'filename': item.filename.match(/[^\\]+$/i)[0], 'folder': item.filename.replace(/[^\\]+$/i, '')});
                 });
             });
         }

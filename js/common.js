@@ -98,8 +98,11 @@ function downWithAria2(session) {
     }
     var folder = (localStorage.getItem('folder') | 0);
     var directory = localStorage.getItem('directory') || '';
-    if (folder === 1 && session.path) {
+    if (session.path) {
         options['dir'] = session.path;
+    }
+    else if (folder === 1 && session.folder) {
+        options['dir'] = session.folder;
     }
     else if (folder === 2 && directory) {
         options['dir'] = directory;
