@@ -2,13 +2,9 @@ $('div.taskQueue').on('click', (event) => {
     var taskInfo = $('div.taskInfo').has($(event.target));
     var status = taskInfo.attr('status');
     var gid = taskInfo.attr('gid');
-    var name = taskInfo.attr('name');
     if (event.target.id === 'show_btn') {
         $('#taskDetails').show();
         printTaskDetails(gid);
-    }
-    else if (event.target.id === 'copy_btn') {
-        getDownloadURLs(gid);
     }
     else if (event.target.id === 'remove_btn') {
         removeTask(status, gid);
@@ -16,60 +12,60 @@ $('div.taskQueue').on('click', (event) => {
     else if (event.target.id === 'progress_btn') {
         toggleTask(status, gid);
     }
+});
 
-    function getDownloadURLs(gid) {
-        var url = $(event.target).attr('uri');
-        navigator.clipboard.writeText(url);
-        showNotification(window['warn_url_copied'], url);
+function removeTask(status, gid) {
+    if (['active', 'waiting', 'paused'].includes(status)) {
+        var method = 'aria2.forceRemove';
     }
+    else if (['complete', 'error', 'removed'].includes(status)) {
+        method = 'aria2.removeDownloadResult';
+    }
+    else {
+        return console.log(status);
+    }
+    jsonRPCRequest({'method': method, 'gid': gid});
+}
 
-    function removeTask(status, gid) {
-        if (['active', 'waiting', 'paused'].includes(status)) {
-            var method = 'aria2.forceRemove';
-        }
-        else if (['complete', 'error', 'removed'].includes(status)) {
-            method = 'aria2.removeDownloadResult';
-        }
-        else {
-            return console.log(status);
-        }
-        jsonRPCRequest({'method': method, 'gid': gid});
+function toggleTask(status, gid) {
+    if (['active', 'waiting'].includes(status)) {
+        var method = 'aria2.pause';
     }
+    else if (status === 'paused') {
+        method = 'aria2.unpause';
+    }
+    else if (['complete', 'error', 'removed'].includes(status)) {
+        method = 'aria2.removeDownloadResult';
+    }
+    else {
+        return console.log(status);
+    }
+    jsonRPCRequest({'method': method, 'gid': gid});
+}
 
-    function toggleTask(status, gid) {
-        if (['active', 'waiting'].includes(status)) {
-            var method = 'aria2.pause';
+function printTaskDetails(gid) {
+    jsonRPCRequest(
+        {'method': 'aria2.tellStatus', 'gid': gid},
+        (result) => {
+            taskManager = setInterval(() => refreshTaskDetails(result.gid), 1000);
+            printTaskName(result);
+            printTaskOption(result.gid);
+            var taskFiles = result.files.map(item => item = '<tr><td>'
+            +           item.index + '</td><td title="' + item.path.replace(/\//g, '\\') 
+            +           (item.uris.length > 0 ? '" uri="' + item.uris[0].uri : '') + '">'
+            +           (item.path || item.uris[0].uri).split('/').pop() + '</td><td>'
+            +           bytesToFileSize(item.length) + '</td><td>'
+            +           ((item.completedLength / item.length * 10000 | 0) / 100).toString() + '%</td></tr>'
+            );
+            $('#taskFiles').html('<table>' + taskFiles.join('') + '</table>').find('td:nth-child(2)').on('click', (event) => {
+                var uri = $(event.target).attr('uri');
+                if (uri) {
+                    navigator.clipboard.writeText(uri);
+                    showNotification(window['warn_url_copied'], uri);
+                }
+            });
         }
-        else if (status === 'paused') {
-            method = 'aria2.unpause';
-        }
-        else if (['complete', 'error', 'removed'].includes(status)) {
-            method = 'aria2.removeDownloadResult';
-        }
-        else {
-            return console.log(status);
-        }
-        jsonRPCRequest({'method': method, 'gid': gid});
-    }
-
-    function printTaskDetails(gid) {
-        jsonRPCRequest(
-            {'method': 'aria2.tellStatus', 'gid': gid},
-            (result) => {
-                taskManager = setInterval(() => refreshTaskDetails(result.gid), 1000);
-                printTaskName(result);
-                printTaskOption(result.gid)
-                var decimal = result.files.length.toString().length;
-                var taskFiles = result.files.map(item => item = '<tr><td>'
-                +           multiDecimalNumber(item.index, decimal) + '</td><td title="' + item.path.replace(/\//g, '\\') + '">'
-                +           item.path.split('/').pop() + '</td><td>'
-                +           bytesToFileSize(item.length) + '</td><td>'
-                +           ((item.completedLength / item.length * 10000 | 0) / 100).toString() + '%</td></tr>'
-                );
-                $('#taskFiles').html('<table>' + taskFiles.join('') + '</table>');
-            }
-        );
-    }
+    );
 
     function refreshTaskDetails(gid) {
         jsonRPCRequest(
@@ -77,9 +73,7 @@ $('div.taskQueue').on('click', (event) => {
             (result) => {
                 printTaskName(result);
                 var completeRatio = result.files.map(item => ((item.completedLength / item.length * 10000 | 0) / 100).toString() + '%');
-                $('#taskFiles').find('td:nth-child(4)').each((index, element) => {
-                    $(element).html(completeRatio[index]);
-                });
+                $('#taskFiles').find('td:nth-child(4)').each((index, element) => $(element).html(completeRatio[index]));
             }
         );
     }
@@ -94,7 +88,7 @@ $('div.taskQueue').on('click', (event) => {
         $('#optionUpload').attr({'gid': result.gid, 'disabled': !bittorrent || complete});
         $('#optionProxy').attr({'gid': result.gid, 'disabled': bittorrent || complete});
     }
-});
+}
 
 function printTaskOption(gid) {
     jsonRPCRequest(
@@ -104,7 +98,7 @@ function printTaskOption(gid) {
             $('#optionUpload').val(result['max-upload-limit']);
             $('#optionProxy').val(result['all-proxy'] || '');
         }
-    )
+    );
 }
 
 $('#taskName').on('click', (event) => {
