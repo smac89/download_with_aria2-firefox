@@ -12,7 +12,10 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 
 var requests = [];
 browser.downloads.onCreated.addListener((item) => {
-    var worker = {'url': item.url, 'saveAs': false, 'filename': item.filename.split('\\').pop()};
+    if (item.url.startsWith('blob')) {
+        return;
+    }
+    var worker = {'url': item.url, 'saveAs': false, 'filename': item.filename};
     var search = -1;
     requests.filter((elem, index) => search = elem.url === item.url ? index : -1);
     if (search !== -1) {
@@ -54,17 +57,12 @@ browser.downloads.onCreated.addListener((item) => {
         var domain = domainFromUrl(item.referrer);
         var check = captureCheck(domain, item.filename.split('.').pop(), item.fileSize);
         if (capture === 2 || check) {
-            downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': domain, 'path': getFilePath(item.filename)});
+            downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': domain, 'filename': item.filename.match(/[^\\]+$/i)[0], 'path': item.filename.replace(/[^\\]+$/i, '')});
         }
         else {
             requests.push(worker);
             browser.downloads.download(worker);
         }
-    }
-
-    function getFilePath(path) {
-        var filename = path.split('\\').pop();
-        return path.replace(filename, '');
     }
 
     function captureCheck(domain, ext, size) {
