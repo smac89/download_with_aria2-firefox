@@ -15,8 +15,8 @@ browser.downloads.onCreated.addListener((item) => {
     if (item.url.startsWith('blob')) {
         return;
     }
-    var worker = {'url': item.url, 'saveAs': false, 'filename': item.filename};
-    var search = request.indexOf(item.url);
+    var worker = {'url': item.url, 'saveAs': false, 'filename': item.filename.match(/[^\\]+$/i)[0]};
+    var search = requests.indexOf(item.url);
     if (search !== -1) {
         requests = [...requests.slice(0, search), ...requests.slice(search + 1)];
         return;
@@ -77,7 +77,7 @@ browser.downloads.onCreated.addListener((item) => {
         if (fileExt && fileExt.includes(ext)) {
             return true;
         }
-        var fileSize = localStorage.getItem('fileSize');
+        var fileSize = (localStorage.getItem('fileSize') | 0);
         if (fileSize > 0 && size >= fileSize) {
             return true;
         }
