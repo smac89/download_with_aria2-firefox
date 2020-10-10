@@ -1,27 +1,26 @@
 body {
-    position: absolute;
-    left: calc((100% - 600px) / 2);
-    width: 600px;
+    margin-left: calc((100% - 430px) / 2);
+    width: 430px;
 }
 
 .container {
-    padding: 10px;
+    margin-left: 10px;
 }
 
-.title {
-    font-size: 20px;
-}
-
-.tab {
-    font-size: 20px;
+.container:nth-child(n+2) {
+    margin-top: 15px;
 }
 
 input, textarea {
-    width: 355px;
+    width: 390px;
 }
 
 select {
     padding: 5px 2px;
+}
+
+#jsonrpc, #token {
+    width: 340px;
 }
 
 #useragent {
@@ -29,5 +28,5 @@ select {
 }
 
 #sizeEntry {
-    width: 300px;
+    width: 335px;
 }
