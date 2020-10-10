@@ -16,8 +16,7 @@ browser.downloads.onCreated.addListener((item) => {
         return;
     }
     var worker = {'url': item.url, 'saveAs': false, 'filename': item.filename};
-    var search = -1;
-    requests.filter((elem, index) => search = elem.url === item.url ? index : -1);
+    var search = request.indexOf(item.url);
     if (search !== -1) {
         requests = [...requests.slice(0, search), ...requests.slice(search + 1)];
         return;
@@ -37,7 +36,7 @@ browser.downloads.onCreated.addListener((item) => {
                 }
             }
             else {
-                requests.push(worker);
+                requests.push(item.url);
                 browser.downloads.download(worker);
             }
         });
@@ -60,7 +59,7 @@ browser.downloads.onCreated.addListener((item) => {
             downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': domain, 'filename': item.filename.match(/[^\\]+$/i)[0], 'path': item.filename.replace(/[^\\]+$/i, '')});
         }
         else {
-            requests.push(worker);
+            requests.push(item.url);
             browser.downloads.download(worker);
         }
     }
