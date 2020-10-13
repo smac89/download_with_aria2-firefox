@@ -2,10 +2,6 @@ body {
     width: 440px;
 }
 
-.menuContainer {
-    height: 20px;
-}
-
 input, textarea {
     width: calc(100% - 15px);
 }
@@ -28,15 +24,8 @@ input, textarea {
 
 #menuTop, #menuBottom {
     position: absolute;
-    right: 8px;
-}
-
-#menuTop {
-    top: 8px;
-}
-
-#menuBottom {
-    bottom: 8px;
+    width: calc(100% - 16px);
+    text-align: right;
 }
 
 #optionsWindow, #newTaskWindow, #taskDetails {
@@ -63,8 +52,8 @@ input, textarea {
     height: calc(100% - 100px);
 }
 
-#newTaskWindow > [title]:nth-child(n+2) {
-    margin-top: 15px;
+#newTaskWindow > div:nth-child(n+2) {
+    margin-top: 10px;
 }
 
 #taskBatch {
