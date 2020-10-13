@@ -91,13 +91,7 @@ function retryTask(gid) {
             {'method': 'aria2.getOption', 'gid': gid},
         ], (files, options) => {
             jsonRPCRequest({'method': 'aria2.removeDownloadResult', 'gid': gid}, () => {
-                var uris = [];
-                files.map(file => file.uris.filter(item => {
-                    if (!uris.includes(item.uri)) {
-                        downWithAria2({'url': item.uri, 'options': options});
-                        uris.push(item.uri);
-                    }
-                }));
+                downWithAria2({'url': files[0].uris[0].uri, 'options': options});
             });
         }
     );
