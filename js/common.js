@@ -61,6 +61,7 @@ function jsonRPCRequest(request, success, failure) {
                     url = url.replace(item, frag);
                 }
             });
+            santilizeLoop(url);
         }
         return url;
     }
@@ -83,10 +84,6 @@ function showNotification(title, message) {
 
 function downWithAria2(session) {
     var options = session.options || {};
-    if (!options['header']) {
-        var useragent = localStorage.getItem('useragent') || navigator.userAgent;
-        options['header'] = ['User-Agent: ' + useragent];
-    }
     var proxied = localStorage.getItem('proxied') || '';
     if (session.proxy) {
         options['all-proxy'] = session.proxy;
@@ -105,15 +102,22 @@ function downWithAria2(session) {
     else if (folder === 2 && directory) {
         options['dir'] = directory;
     }
-    if (session.referer) {
-        browser.cookies.getAll({'url': session.referer}, (cookies) => {
-            options.header.push('Referer: ' + session.referer);
-            options.header.push('Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' '));
-            sendRequest(options);
-        });
+    if (options['header']) {
+        sendRequest(options);
     }
     else {
-        sendRequest(options);
+        var useragent = localStorage.getItem('useragent') || navigator.userAgent;
+        options['header'] = ['User-Agent: ' + useragent];
+        if (session.referer) {
+            chrome.cookies.getAll({'url': session.referer}, (cookies) => {
+                options.header.push('Referer: ' + session.referer);
+                options.header.push('Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' '));
+                sendRequest(options);
+            });
+        }
+        else {
+            sendRequest(options);
+        }
     }
 
     function sendRequest(options) {
