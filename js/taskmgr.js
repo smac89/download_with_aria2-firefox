@@ -61,7 +61,7 @@ function printTaskDetails(gid) {
             $('#optionUpload').attr({'gid': result.gid, 'disabled': !bittorrent || complete});
             $('#optionProxy').attr({'gid': result.gid, 'disabled': bittorrent || complete});
             var taskFiles = result.files.map(item => item = printFileInfo(item));
-            $('#taskFiles').attr('uri', taskUrl).html('<table>' + taskFiles.join('') + '</table>')
+            $('#taskFiles').attr('uri', taskUrl).html('<table>' + taskFiles.join('') + '</table>');
         }
     );
 
