@@ -8,6 +8,4 @@
     - 2 Browser (Browser download folder)
     - 3 Custom (Custom folder), if custom folder is `EMPTY`, return 1
 - Cancel the download first before removing it from history to prevent downloading the file twice
-- Disabled `File Size` filter because `downloadItem.fileSize` property is `-1` on Firefox
-    - See https://bugzilla.mozilla.org/show_bug.cgi?id=1666137 for more details
 - Changed all `chrome` to `browser` for Firefox
