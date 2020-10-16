@@ -1,11 +1,7 @@
-$('[i18n]').each((index, element) => {
-    $(element).html(browser.i18n.getMessage(element.innerHTML));
-});
+document.querySelectorAll('[i18n]').forEach(item => item.innerHTML = browser.i18n.getMessage(item.innerHTML));
 
-$('[i18n_title]').each((index, element) => {
-    $(element).attr('title', browser.i18n.getMessage(element.title));
-});
+document.querySelectorAll('[i18n_title]').forEach(item => item.title = browser.i18n.getMessage(item.title));
 
 [
     'warn_aria2_version', 'warn_url_copied'
-].map(item => window[item] = browser.i18n.getMessage(item));
+].forEach(item => window[item] = browser.i18n.getMessage(item));
