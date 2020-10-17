@@ -120,16 +120,10 @@
         "message": "Stopped"
     },
     "popup_new_button": {
-        "message": "New"
-    },
-    "popup_cancel_button": {
-        "message": "Cancel"
+        "message": "New Task"
     },
     "popup_purge_button": {
         "message": "Purge"
-    },
-    "popup_submit_button": {
-        "message": "Submit"
     },
     "popup_options_button": {
         "message": "Options"
@@ -157,6 +151,9 @@
     },
     "new_task_proxy_desc": {
         "message": "Add \"all-proxy\" option to this download session"
+    },
+    "new_task_submit": {
+        "message": "Submit"
     },
     "task_option_download": {
         "message": "Max Download Speed"
