@@ -77,7 +77,7 @@ function showNotification(title, message) {
     var notification = {
         'type': 'basic',
         'title': title,
-        'iconUrl': 'icons/icon64.png',
+        'iconUrl': '/icons/icon64.png',
         'message': message || ''
     };
     browser.notifications.create(id, notification, () => {
