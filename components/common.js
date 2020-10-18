@@ -77,12 +77,12 @@ function showNotification(title, message) {
     var notification = {
         'type': 'basic',
         'title': title,
-        'iconUrl': '/icons/icon64.png',
+        'iconUrl': 'icons/icon64.png',
         'message': message || ''
     };
-    chrome.notifications.create(id, notification, () => {
+    browser.notifications.create(id, notification, () => {
         setTimeout(() => {
-            chrome.notifications.clear(id);
+            browser.notifications.clear(id);
         }, 5000);
     });
 }
@@ -98,6 +98,14 @@ function downWithAria2(session) {
     }
     if (session.filename) {
         options['out'] = session.filename;
+    }
+    var folder = (localStorage.getItem('folder') | 0);
+    var directory = localStorage.getItem('directory') || '';
+    if (folder === 1 && session.path) {
+        options['dir'] = session.path;
+    }
+    else if (folder === 2 && directory) {
+        options['dir'] = directory;
     }
     if (options['header']) {
         sendRequest(options);
@@ -116,7 +124,6 @@ function downWithAria2(session) {
             sendRequest(options);
         }
     }
-
 
     function sendRequest(options) {
         jsonRPCRequest(
