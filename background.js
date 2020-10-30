@@ -57,18 +57,19 @@ browser.downloads.onCreated.addListener((item) => {
             return aria2Download(item);
         }
         var fileSize = (localStorage.getItem('fileSize') | 0);
-        var xhr = new XMLHttpRequest();
-        xhr.open('HEAD', item.url, true);
-        xhr.onload = (event) => {
-            item.fileSize = xhr.getResponseHeader('Content-Length');
-            if (fileSize > 0 && item.fileSize >= fileSize) {
-                aria2Download(item);
-            }
-            else {
-                resumeDownload(worker);
-            }
-        };
-        xhr.send();
+        if (fileSize > 0) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('HEAD', item.url, true);
+            xhr.onload = (event) => {
+                if (xhr.getResponseHeader('Content-Length') >= fileSize) {
+                    aria2Download(item);
+                }
+                else {
+                    resumeDownload(worker);
+                }
+            };
+            xhr.send();
+        }
     }
 
     function resumeDownload(worker) {
