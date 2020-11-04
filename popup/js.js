@@ -104,7 +104,8 @@ function printMainFrame() {
         var completeRatio = ((result.completedLength / result.totalLength * 10000 | 0) / 100).toString() + '%';
         var taskUrl = bittorrent ?  '' : result.files[0].uris[0].uri;
         var taskName = bittorrent && bittorrent.info ? bittorrent.info.name : result.files[0].path.split('/').pop() || taskUrl;
-        var retry_show = !bittorrent && ['error', 'removed'].includes(status) ? 'inline-block' : 'none';
+        var retryButton = !bittorrent && ['error', 'removed'].includes(status) ? 'inline-block' : 'none';
+        var fancyBar = status === 'active' ? '#3CC' : '#CCC';
         return  '<div class="taskInfo">'
         +           '<div class="taskBody">'
         +               '<div class="title">' + taskName + '</div>'
@@ -114,9 +115,9 @@ function printMainFrame() {
         +           '<div class="taskMenu">'
         +               '<span class="button" onclick="removeTask(\'' + gid + '\',\'' + status + '\')">❌</span>'
         +               '<span class="button" onclick="investTask(\'' + gid + '\')">🔍</span>'
-        +               '<span class="button" onclick="retryTask(\''+ gid + '\')" style="display: ' + retry_show + '">♻️</span>'
+        +               '<span class="button" onclick="retryTask(\''+ gid + '\')" style="display: ' + retryButton + '">♻️</span>'
         +           '</div>'
-        +           '<div id="fancybar" class="' + status + 'Bar" onclick="toggleTask(\'' + gid + '\',\'' + status + '\')">'
+        +           '<div id="fancybar" style="background-color: ' + fancyBar + ';" onclick="toggleTask(\'' + gid + '\',\'' + status + '\')">'
         +               '<div class="' + status + '" style="width: ' + completeRatio + '">' + completeRatio + '</div>'
         +           '</div>'
         +       '</div>';
