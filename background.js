@@ -81,3 +81,22 @@ browser.downloads.onCreated.addListener((item) => {
         downWithAria2({'url': item.url, 'referer': item.referrer, 'domain': item.domain, 'filename': item.filename.match(/[^\\]+$/i)[0], 'path': item.filename.replace(/[^\\]+$/i, '')});
     }
 });
+
+
+function displayActiveTaskNumber() {
+    jsonRPCRequest(
+        {'method': 'aria2.getGlobalStat'},
+        (result) => {
+            if (result.numActive !== '0') {
+                browser.browserAction.setBadgeText({'text': result.numActive});
+                browser.browserAction.setBadgeBackgroundColor({'color': '#3CC'});
+            }
+            else {
+                browser.browserAction.setBadgeText({'text': ''});
+            }
+        }
+    )
+}
+
+displayActiveTaskNumber();
+var activeTaskNumber = setInterval(displayActiveTaskNumber, 1000);
