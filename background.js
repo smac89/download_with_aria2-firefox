@@ -82,7 +82,6 @@ browser.downloads.onCreated.addListener((item) => {
     }
 });
 
-
 function displayActiveTaskNumber() {
     jsonRPCRequest(
         {'method': 'aria2.getGlobalStat'},
