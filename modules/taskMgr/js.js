@@ -29,7 +29,6 @@ function printTaskDetails(gid) {
         var filePath = info.path.replace(/\//g, '\\');
         var fileSize = bytesToFileSize(info.length);
         var fileRatio = ((info.completedLength / info.length * 10000 | 0) / 100).toString() + '%';
-        var clickEvent = bittorrent ? '' : 'copyFileUrl(\'' + fileUrl + '\')';
         return '<tr uri="' + fileUrl + '"><td>' + info.index + '</td><td title="' + filePath + '">' + filename + '</td><td>' + fileSize + '</td><td>' + fileRatio + '</td></tr>';
     }
 }
@@ -65,10 +64,8 @@ document.getElementById('taskName').addEventListener('click', (event) => {
     clearInterval(taskManager);
 });
 
-document.getElementById('taskFiles').addEventListener('click', (event) => {
-    var fileInfo;
-    document.querySelectorAll('tr').forEach((item, index)=> { if (item.contains(event.target)) fileInfo = item; });
-    var uri = fileInfo.getAttribute('uri');
+document.getElementById('taskFiles').addEventListener('click', (event, uri) => {
+    document.querySelectorAll('tr').forEach((item, index)=> { if (item.contains(event.target)) fileInfo = item.getAttribute('uri'); });
     if (uri) {
         navigator.clipboard.writeText(uri);
         showNotification(window['warn_url_copied'], uri);
