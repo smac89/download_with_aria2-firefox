@@ -16,7 +16,7 @@ browser.downloads.onCreated.addListener((item) => {
         return;
     }
 
-    var session = {'url': item.url, 'saveAs': true, 'filename': item.filename.match(/[^\\]+$/i)[0]};
+    var session = {'url': item.url, 'filename': item.filename.match(/[^\\]+$/i)[0], 'path': item.filename.replace(/[^\\]+$/i, '')};
     chrome.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
         session.referer = item.referrer || tabs[0].url;
         session.domain = domainFromUrl(session.referer);
