@@ -65,7 +65,7 @@ document.getElementById('taskName').addEventListener('click', (event) => {
 });
 
 document.getElementById('taskFiles').addEventListener('click', (event, uri) => {
-    document.querySelectorAll('tr').forEach((item, index)=> { if (item.contains(event.target)) fileInfo = item.getAttribute('uri'); });
+    document.querySelectorAll('tr').forEach((item, index)=> { if (item.contains(event.target)) uri = item.getAttribute('uri'); });
     if (uri) {
         navigator.clipboard.writeText(uri);
         showNotification(window['warn_url_copied'], uri);
