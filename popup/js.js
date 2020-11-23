@@ -141,10 +141,10 @@ document.getElementById('taskQueue').addEventListener('click', (event) => {
         }
         jsonRPCRequest({'method': method, 'gid': gid});
     }
-    if (element.id === 'invest_btn') {
+    else if (element.id === 'invest_btn') {
         openModuleWindow({'name': 'taskMgr', 'id': 'taskMgrWindow', 'load': (event) => event.target.contentWindow.postMessage(gid)});
     }
-    if (element.id === 'retry_btn') {
+    else if (element.id === 'retry_btn') {
         jsonRPCRequest([
                 {'method': 'aria2.getFiles', 'gid': gid},
                 {'method': 'aria2.getOption', 'gid': gid},
@@ -155,7 +155,7 @@ document.getElementById('taskQueue').addEventListener('click', (event) => {
             }
         );
     }
-    if (element.id === 'fancybar') {
+    else if (element.id === 'fancybar') {
         if (['active', 'waiting'].includes(status)) {
             var method = 'aria2.pause';
         }
