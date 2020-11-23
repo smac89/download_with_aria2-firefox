@@ -17,7 +17,7 @@ browser.downloads.onCreated.addListener((item) => {
     }
 
     var session = {'url': item.url, 'filename': item.filename.match(/[^\\]+$/i)[0], 'path': item.filename.replace(/[^\\]+$/i, '')};
-    chrome.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
+    browser.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
         session.referer = item.referrer || tabs[0].url;
         session.domain = domainFromUrl(session.referer);
         if (capture === 2) {
@@ -36,14 +36,14 @@ browser.downloads.onCreated.addListener((item) => {
             return captureDownload();
         }
         var fileSize = (localStorage.getItem('fileSize') | 0);
-        if (fileSize !== 0 && item.fileSize >= fileSize) {
+        if (fileSize !== 0 && item.fileSize >= fileSize && item.fileSize !== -1) {
             return captureDownload();
         }
     });
 
     function captureDownload() {
-        chrome.downloads.cancel(item.id, () => {
-            chrome.downloads.erase({'id': item.id}, () => {
+        browser.downloads.cancel(item.id, () => {
+            browser.downloads.erase({'id': item.id}, () => {
                 downWithAria2(session);
             });
         });
