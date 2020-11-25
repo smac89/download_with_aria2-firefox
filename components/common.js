@@ -113,7 +113,7 @@ function downWithAria2(session) {
                 showNotification('Downloading', session.url);
             },
             (error, rpc) => {
-                showNotification(error, rpc || session.url || 'No URI to download');
+                showNotification(error, rpc || session.url);
             }
         );
     }
