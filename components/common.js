@@ -107,16 +107,12 @@ function downWithAria2(session) {
 function showNotification(title, message) {
     var id = 'aria2_' + Date.now();
     var notification = {
-        'type': 'basic',
-        'title': title,
-        'iconUrl': '/icons/icon48.png',
-        'message': message || ''
+        type: 'basic',
+        title: title,
+        iconUrl: '/icons/icon48.png',
+        message: message || ''
     };
-    browser.notifications.create(id, notification, () => {
-        setTimeout(() => {
-            browser.notifications.clear(id);
-        }, 5000);
-    });
+    browser.notifications.create(id, notification, () => setTimeout(() => browser.notifications.clear(id), 5000));
 }
 
 function domainFromUrl(url) {
