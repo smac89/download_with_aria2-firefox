@@ -93,15 +93,20 @@ function downWithAria2(session) {
             browser.cookies.getAll({'url': session.referer}, (cookies) => {
                 options.header.push('Referer: ' + session.referer);
                 options.header.push('Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' '));
+                sendRPCRequest();
             });
+            return;
         }
     }
+    sendRPCRequest();
 
-    jsonRPCRequest(
-        {'method': 'aria2.addUri', 'url': session.url, 'options': options},
-        (result) => showNotification('Downloading', session.url),
-        (error, rpc) => showNotification(error, rpc || session.url)
-    );
+    function sendRPCRequest() {
+        jsonRPCRequest(
+            {'method': 'aria2.addUri', 'url': session.url, 'options': options},
+            (result) => showNotification('Downloading', session.url),
+            (error, rpc) => showNotification(error, rpc || session.url)
+        );
+    }
 }
 
 function showNotification(title, message) {
