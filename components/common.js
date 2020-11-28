@@ -67,42 +67,42 @@ function jsonRPCRequest(request, success, failure) {
 }
 
 function downWithAria2(session) {
-    var options = session.options || {};
+    if (session.options) {
+        return sendRPCRequest();
+    }
+    session.options = {};
     var proxied = localStorage.getItem('proxied') || '';
     if (session.proxy) {
-        options['all-proxy'] = session.proxy;
+        session.options['all-proxy'] = session.proxy;
     }
     else if (proxied.includes(session.domain)) {
-        options['all-proxy'] = localStorage.getItem('allproxy') || '';
+        session.options['all-proxy'] = localStorage.getItem('allproxy') || '';
     }
     if (session.filename) {
-        options['out'] = session.filename;
+        session.options['out'] = session.filename;
     }
     var folder = (localStorage.getItem('folder') | 0);
     var directory = localStorage.getItem('directory') || '';
     if (folder === 1 && session.path) {
-        options['dir'] = session.path;
+        session.options['dir'] = session.path;
     }
     else if (folder === 2 && directory) {
-        options['dir'] = directory;
+        session.options['dir'] = directory;
     }
-    if (!options['header']) {
-        var useragent = localStorage.getItem('useragent') || navigator.userAgent;
-        options['header'] = ['User-Agent: ' + useragent];
-        if (session.referer) {
-            browser.cookies.getAll({'url': session.referer}, (cookies) => {
-                options.header.push('Referer: ' + session.referer);
-                options.header.push('Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' '));
-                sendRPCRequest();
-            });
-            return;
-        }
+    var useragent = localStorage.getItem('useragent') || navigator.userAgent;
+    session.options['header'] = ['User-Agent: ' + useragent];
+    if (!session.referer) {
+        return sendRPCRequest();
     }
-    sendRPCRequest();
+    browser.cookies.getAll({'url': session.referer}, (cookies) => {
+        session.options.header.push('Referer: ' + session.referer);
+        session.options.header.push('Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' '));
+        sendRPCRequest();
+    });
 
     function sendRPCRequest() {
         jsonRPCRequest(
-            {'method': 'aria2.addUri', 'url': session.url, 'options': options},
+            {'method': 'aria2.addUri', 'url': session.url, 'options': session.options},
             (result) => {
                 showNotification('Downloading', session.url);
             },
