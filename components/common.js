@@ -68,7 +68,7 @@ function jsonRPCRequest(request, success, failure) {
 
 function downWithAria2(session) {
     var options = session.options || {};
-    if (Object.keys(options).length > 5) {
+    if (session.bypass) {
         return sendRPCRequest();
     }
     var proxied = localStorage.getItem('proxied') || '';
@@ -88,7 +88,7 @@ function downWithAria2(session) {
     if (!session.referer) {
         return sendRPCRequest();
     }
-    browser.cookies.getAll({'url': session.referer}, (cookies) => {
+    browser.cookies.getAll({url: session.referer}, (cookies) => {
         options.header.push('Referer: ' + session.referer);
         options.header.push('Cookie: ' + cookies.map(item => item.name + '=' + item.value + ';').join(' '));
         sendRPCRequest();
@@ -96,7 +96,7 @@ function downWithAria2(session) {
 
     function sendRPCRequest() {
         jsonRPCRequest(
-            {'method': 'aria2.addUri', 'url': session.url, 'options': options},
+            {method: 'aria2.addUri', url: session.url, options: options},
             (result) => {
                 showNotification('Downloading', session.url);
             },

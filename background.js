@@ -1,12 +1,12 @@
 browser.contextMenus.create({
-    'title': browser.i18n.getMessage('extension_name'),
-    'id': 'downwitharia2firefox',
-    'contexts': ['link']
+    title: browser.i18n.getMessage('extension_name'),
+    id: 'downwitharia2firefox',
+    contexts: ['link']
 });
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === 'downwitharia2firefox') {
-        downWithAria2({'url': info.linkUrl, 'referer': tab.url, 'domain': domainFromUrl(tab.url)});
+        downWithAria2({url: info.linkUrl, referer: tab.url, domain: domainFromUrl(tab.url)});
     }
 });
 
@@ -17,7 +17,7 @@ browser.downloads.onCreated.addListener((item) => {
     }
 
     var session = {url: item.url, folder: item.filename.replace(/[^\\]+$/i, ''), options: {'out': item.filename.replace(/^([^\\]+\\)+/, '')}};
-    browser.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
+    browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
         session.referer = item.referrer || tabs[0].url;
         session.domain = domainFromUrl(session.referer);
         if (capture === 2) {
@@ -43,7 +43,7 @@ browser.downloads.onCreated.addListener((item) => {
 
     function captureDownload() {
         browser.downloads.cancel(item.id, () => {
-            browser.downloads.erase({'id': item.id}, () => {
+            browser.downloads.erase({id: item.id}, () => {
                 downWithAria2(session);
             });
         });
@@ -52,14 +52,14 @@ browser.downloads.onCreated.addListener((item) => {
 
 function displayActiveTaskNumber() {
     jsonRPCRequest(
-        {'method': 'aria2.getGlobalStat'},
+        {method: 'aria2.getGlobalStat'},
         (result) => {
             if (result.numActive !== '0') {
-                browser.browserAction.setBadgeText({'text': result.numActive});
-                browser.browserAction.setBadgeBackgroundColor({'color': '#3CC'});
+                browser.browserAction.setBadgeText({text: result.numActive});
+                browser.browserAction.setBadgeBackgroundColor({color: '#3CC'});
             }
             else {
-                browser.browserAction.setBadgeText({'text': ''});
+                browser.browserAction.setBadgeText({text: ''});
             }
         }
     )
