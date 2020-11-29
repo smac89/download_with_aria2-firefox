@@ -94,4 +94,3 @@ function calcFileSize(event) {
 
 document.getElementById('sizeEntry').disabled = true;
 document.getElementById('sizeUnit').disabled = true;
-localStorage.setItem('fileSize', 0);
