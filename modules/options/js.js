@@ -25,23 +25,22 @@ function toggleMenuTab(active) {
     {id: 'fileExt', value: ''},
     {id: 'monitored', value: ''},
     {id: 'ignored', value: ''}
-].forEach(item => initiateOption(item));
+].forEach(item => initiateOption(document.getElementById(item.id), item));
 
-function initiateOption(menuitem) {
-    var setting = document.getElementById(menuitem.id);
-    if (menuitem.change) {
-        setting.addEventListener('change', menuitem.change);
+function initiateOption(setting, property) {
+    if (property.change) {
+        setting.addEventListener('change', property.change);
     }
-    if (menuitem.checkbox) {
-        setting.setAttribute('checked', JSON.parse(localStorage.getItem(menuitem.id)) || menuitem.value);
-        setting.addEventListener('change', event => localStorage.setItem(menuitem.id, event.target.checked));
+    if (property.checkbox) {
+        setting.setAttribute('checked', JSON.parse(localStorage.getItem(property.id)) || property.value);
+        setting.addEventListener('change', event => localStorage.setItem(property.id, event.target.checked));
     }
     else {
-        setting.value = localStorage.getItem(menuitem.id) || menuitem.value
-        setting.addEventListener('change', event => localStorage.setItem(menuitem.id, event.target.value));
+        setting.value = localStorage.getItem(property.id) || property.value
+        setting.addEventListener('change', event => localStorage.setItem(property.id, event.target.value));
     }
-    if (menuitem.load) {
-        menuitem.load();
+    if (property.load) {
+        property.load();
     }
 }
 
