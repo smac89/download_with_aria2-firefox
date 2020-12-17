@@ -16,8 +16,9 @@ browser.downloads.onCreated.addListener((item) => {
         return;
     }
 
-    var session = {url: item.url, folder: item.filename.replace(/[^\\]+$/i, ''), options: {'out': item.filename.replace(/^([^\\]+\\)+/, '')}};
+    var session = {url: item.url, options: {out: item.filename.split(/[\/\\]+/).pop()}};
     browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
+        session.folder = item.filename.replace(session.options.out, '');
         session.referer = item.referrer || tabs[0].url;
         session.domain = domainFromUrl(session.referer);
         if (capture === 2) {
