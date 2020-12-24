@@ -1,17 +1,14 @@
 browser.contextMenus.create({
     title: browser.i18n.getMessage('extension_name'),
     id: 'downwitharia2firefox',
-    contexts: ['link']
-});
-
-browser.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === 'downwitharia2firefox') {
+    contexts: ['link'],
+    onclick: (info, tab) => {
         downWithAria2({url: info.linkUrl, referer: tab.url, domain: domainFromUrl(tab.url)});
     }
 });
 
 browser.downloads.onCreated.addListener((item) => {
-    var capture = (localStorage.getItem('capture') | 0);
+    var capture = localStorage.getItem('capture') | 0;
     if (capture === 0 || item.url.match(/^(blob|data)/)) {
         return;
     }
@@ -36,7 +33,7 @@ browser.downloads.onCreated.addListener((item) => {
         if (fileExt.includes(item.filename.split('.').pop())) {
             return captureDownload();
         }
-        var fileSize = (localStorage.getItem('fileSize') | 0);
+        var fileSize = localStorage.getItem('fileSize') | 0;
         if (fileSize !== 0 && item.fileSize >= fileSize && item.fileSize !== -1) {
             return captureDownload();
         }
