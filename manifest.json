@@ -11,15 +11,21 @@
         "persistent": false
     },
     "browser_action": {
-        "default_icon": {
-            "24": "/icons/icon24.png"
-        },
-        "default_popup": "/popup/index.html"
+    "browser_style": true,
+    "default_icon":"/icons/icon.svg",
+        "default_popup": "/popup/index.html",
+        "theme_icons": [{
+            "dark": "icons/icon.svg",
+            "light": "icons/icon-light.svg",
+            "size": 16
+        }, {
+            "dark": "icons/icon.svg",
+            "light": "icons/icon-light.svg",
+            "size": 32
+        }]
     },
     "icons": {
-        "128": "/icons/icon128.png",
-        "16": "/icons/icon16.png",
-        "48": "/icons/icon48.png"
+        "1": "/icons/icon.svg"
     },
     "options_ui": {
         "page": "/modules/options/index.html",
